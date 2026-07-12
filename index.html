@@ -1716,14 +1716,15 @@
           transform 0.14s ease;
       }
       .modes .modetab.rico svg {
-        width: 27px;
-        height: 27px;
+        width: 38px;
+        height: 38px;
       }
-      /* Chat = the hub, rendered a touch larger (owner arrangement) */
+      /* Chat = primary, rendered a touch larger */
       .modes .modetab.rico.rico-chat svg {
-        width: 32px;
-        height: 32px;
+        width: 44px;
+        height: 44px;
       }
+      /* Owner arrangement 2026-07-12: Chat LEFT · Lamp CENTER · Production (clapperboard) RIGHT — set via DOM order of the buttons below (CSS order would reshuffle the A/A/collapse controls too). */
       .modes .modetab.rico:hover {
         color: var(--text);
         background: transparent;
@@ -1768,15 +1769,15 @@
       }
       .cbadge {
         position: absolute;
-        top: 1px;
-        right: -5px;
-        min-width: 19px;
-        height: 19px;
-        padding: 0 5px;
+        top: 2px;
+        right: -4px;
+        min-width: 27px;
+        height: 27px;
+        padding: 0 6px;
         border-radius: 999px;
         display: grid;
         place-items: center;
-        font-size: 11.5px;
+        font-size: 14.5px;
         font-weight: 700;
         color: #fff;
         line-height: 1;
@@ -3377,34 +3378,7 @@
                LEFT · Chat (bubble) CENTER (hub, slightly larger) · Notification (lamp) RIGHT. Glyphs lifted
                verbatim from the ratified/merged switcher; ids · data-mode · role · aria kept so the existing
                switchMode JS is UNCHANGED. Selected = filled-white glyph (CSS .rico.on). ══ -->
-          <!-- Production · clapperboard (LEFT) — maps the Deck tab; counter = production status token -->
-          <button
-            class="modetab rico rico-prod tab-deck"
-            id="tabDeck"
-            role="tab"
-            aria-selected="false"
-            data-mode="deck"
-            title="Deck"
-            aria-label="Deck — 1 in production"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="0.9"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect class="rs-glyph" x="3.5" y="9.5" width="17" height="10" rx="1.8" />
-              <path
-                class="rs-glyph"
-                d="M4 9.5 L5.1 5.95 A1.3 1.3 0 0 1 6.75 5.05 L19.35 7.35 A1.3 1.3 0 0 1 20.35 8.95 L20.15 9.5 Z"
-              />
-              <path class="rs-stripes" d="M7.7 5.35 L6.55 9 M11.35 6 L10.2 9.4 M15 6.65 L13.85 9.15" />
-            </svg>
-            <span class="cbadge b-retake">1</span>
-          </button>
-          <!-- Chat · message bubble (CENTER · hub · slightly larger) · selected = filled white · NO counter -->
+          <!-- Chat · message bubble (LEFT · primary · slightly larger) · selected = filled white · NO counter -->
           <button
             class="modetab rico rico-chat on"
             id="tabChat"
@@ -3456,6 +3430,33 @@
               <rect class="rs-fill" x="10.5" y="19.6" width="3" height="1.6" rx="0.8" />
             </svg>
             <span class="cbadge b-acc">3</span>
+          </button>
+          <!-- Production · clapperboard (RIGHT) — maps the Deck tab; counter = production status token -->
+          <button
+            class="modetab rico rico-prod tab-deck"
+            id="tabDeck"
+            role="tab"
+            aria-selected="false"
+            data-mode="deck"
+            title="Deck"
+            aria-label="Deck — 1 in production"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.9"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect class="rs-glyph" x="3.5" y="9.5" width="17" height="10" rx="1.8" />
+              <path
+                class="rs-glyph"
+                d="M4 9.5 L5.1 5.95 A1.3 1.3 0 0 1 6.75 5.05 L19.35 7.35 A1.3 1.3 0 0 1 20.35 8.95 L20.15 9.5 Z"
+              />
+              <path class="rs-stripes" d="M7.7 5.35 L6.55 9 M11.35 6 L10.2 9.4 M15 6.65 L13.85 9.15" />
+            </svg>
+            <span class="cbadge b-retake">1</span>
           </button>
           <!-- gooey metaball SVG filter (0-size, defs only) -->
           <svg class="goo-defs" width="0" height="0" aria-hidden="true">
