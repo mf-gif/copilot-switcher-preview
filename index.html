@@ -22,11 +22,10 @@
 <script src="sceneos-theme.js?v=7"></script>
 <link rel="stylesheet" href="sceneos-theme.css?v=7" />
 <style>
-  /* Switcher tokens missing from the shared theme (Olive PORT-SPEC 2026-07-12 values).
-     --acc / --ok / --text / --panel come from sceneos-theme.css. --retake (canon burnt-orange, the
-     ratified retake default — NOT amber, which is an owner-open cross-cutting pick), --stuck (red),
-     and --bg (clapperboard stripe knockout) are added here to match the ratified mockup. */
-  :root{--retake:#E07C2E;--stuck:#FF2E1F;--bg:#0b0b0f}
+  /* Switcher counter colours = CANON production status tokens (src/app/globals.css --rs-*), mirrored 1:1
+     per owner-closed decision (via Olive 2026-07-12): the clapperboard counter reflects EXISTING status
+     colours, ZERO new colours. --acc/--text/--panel/--mut come from sceneos-theme.css. */
+  :root{--rs-await:#fbbf24;--rs-retake:#e07c2e;--rs-stuck:#ff2e1f;--rs-approved:#34d399;--bg:#0b0b0f}
   /* 28px grid: tile width 420 (15×28), height GROWS · avatar 56 (2×28) · rhythm 14 (½×28) · pad 14 · btn h28. */
   .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);margin-bottom:.3rem;display:block}
   .fieldval{font-size:13px;color:var(--soft)}
@@ -50,16 +49,24 @@
   .cbadge{position:absolute;top:2px;right:-4px;min-width:27px;height:27px;padding:0 6px;border-radius:999px;
     display:grid;place-items:center;font-size:14.5px;font-weight:700;color:#fff;line-height:1;
     font-variant-numeric:tabular-nums;border:2.5px solid var(--panel)}
-  /* Notification lamp = blue (informational). Production clapperboard = traffic-light state. */
-  .b-acc{background:var(--acc)}          /* notification */
-  .b-ok{background:var(--ok)}            /* production · approve  #34D399 */
-  .b-retake{background:var(--retake)}    /* production · retake   #E07C2E */
-  .b-stuck{background:var(--stuck)}      /* production · stuck    #FF2E1F */
+  /* Lamp = info-blue. Clapperboard = CURRENT production state, priority stuck>retake>awaiting>approve. */
+  .b-acc{background:var(--acc)}               /* notification · info-blue */
+  .b-await{background:var(--rs-await)}        /* production · awaiting #FBBF24 */
+  .b-retake{background:var(--rs-retake)}      /* production · retake   #E07C2E */
+  .b-stuck{background:var(--rs-stuck)}        /* production · stuck    #FF2E1F */
+  .b-approved{background:var(--rs-approved)}  /* production · approve  #34D399 */
   /* Motion (spec — resting render stays static; classes are here for the app port). */
   .cbadge.anim{animation:pop .5s cubic-bezier(.2,1.5,.4,1)}
   .cu.breathe{animation:breathe 3.4s ease-in-out infinite}
   @keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
   @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  /* Hover (Olive behavior model): line lightens toward white, no plate, ~.14s. */
+  .cu{transition:color .14s ease}
+  .cu:hover{color:var(--text)}
+  /* Production status legend — makes the clapperboard-counter colour self-explanatory (owner «не понял»). Canon --rs-* tokens. */
+  .pstates{display:flex;gap:18px;justify-content:center;margin-top:12px}
+  .ps{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+  .pd{width:9px;height:9px;border-radius:999px;display:inline-block}
 </style>
 </head>
 <body class="min-h-screen p-[28px]">
@@ -89,6 +96,13 @@
         <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 A6 6 0 0 0 8.4 13.8 C9.1 14.4 9.5 15.1 9.6 15.9 H14.4 C14.5 15.1 14.9 14.4 15.6 13.8 A6 6 0 0 0 12 3 Z"/><path d="M9.8 18 H14.2 M10.6 20.2 H13.4"/></svg>
         <span class="cbadge b-acc">5</span>
       </div>
+    </div>
+    <!-- Production status legend — what each clapperboard-counter colour means (canon --rs-* tokens, zero new). -->
+    <div class="pstates">
+      <span class="ps"><i class="pd b-await"></i>awaiting</span>
+      <span class="ps"><i class="pd b-retake"></i>retake</span>
+      <span class="ps"><i class="pd b-stuck"></i>stuck</span>
+      <span class="ps"><i class="pd b-approved"></i>approved</span>
     </div>
   </div>
 
