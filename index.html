@@ -1726,6 +1726,9 @@
         height: 44px;
       }
       /* Owner arrangement 2026-07-12: Chat LEFT · Lamp CENTER · Production (clapperboard) RIGHT — set via DOM order of the buttons below (CSS order would reshuffle the A/A/collapse controls too). */
+      /* extra air before the clapperboard so lamp→clapper reads the SAME as chat→lamp — the lamp's badge sticks
+         into the right gap, so equal margins look uneven; compensate here (owner 2026-07-12). */
+      .modes .modetab.rico-prod { margin-left: 12px; }
       .modes .modetab.rico:hover {
         color: var(--text);
         background: transparent;
